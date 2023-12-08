@@ -15,7 +15,7 @@ def sample_dataframe():
 
 def test_correlation_n(sample_dataframe, capsys):
     # Class instance with the sample DataFrame
-    df = common.Prepup(dataframe=sample_dataframe)
+    df = Prepup(dataframe=sample_dataframe)
 
     # Call the function
     df.correlation_n()
