@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 import numpy as np
-from common import Prepup
+from main.common import Prepup
 
 @pytest.fixture
 def sample_dataframe():

@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from common import Prepup
+from main.common import Prepup
 from termcolor import colored
 from pyfiglet import Figlet
 from scipy.stats import shapiro
