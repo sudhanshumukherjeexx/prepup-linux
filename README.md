@@ -1,5 +1,6 @@
 # 💻 Prepup
 Built with ♥️ by [Sudhanshu Mukherjee](https://www.linkedin.com/in/sudhanshumukherjeexx/)
+[![image](https://img.shields.io/pypi/v/prepup.svg)](https://pypi.python.org/pypi/prepup-linux)
 [PyPI version](https://img.shields.io/pypi/v/prepup-linux.svg)(https://pypi.org/project/prepup-linux/)
 [Linux](https://img.shields.io/badge/Linux-compatible-brightgreen.svg)
 [macOS](https://img.shields.io/badge/macOS-compatible-brightgreen.svg)
