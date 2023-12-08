@@ -4,7 +4,7 @@
 
     author: "Neokai"
 """
-#import polars as pl
+
 import pandas as pd
 import plotext as tpl
 import numpy as np
@@ -35,6 +35,9 @@ class Prepup:
         :return: An instance of the class
         :author: Neokai
         """
+        if dataframe is None:
+            dataframe = pd.DataFrame()
+        
         self.dataframe = dataframe
     
     def features_available(self):
@@ -46,10 +49,8 @@ class Prepup:
         :return: A list of the column names in the dataframe
         :author: Neokai
         """
-        #try:
         return self.dataframe.columns
-        #except:
-            #print("Something went wrong...\nCouldn't intialize the dataset properly...")
+        
 
     def dtype_features(self):
         """
@@ -60,12 +61,9 @@ class Prepup:
         :return: A series with the data type of each feature (column) in a pandas dataframe
         :author: Neokai
         """
-        # try:
         return self.dataframe.dtypes
-        # except:
-        #     print("Something went wrong....\nCouldn't display DataTypes of Features...")
 
-    def missing_values(self):
+    def missing_values_count(self):
         """
         The missing_values function returns the number of missing values in each column.
             Args:
@@ -77,14 +75,11 @@ class Prepup:
         :return: The number of missing values in each column
         :author: Neokai
         """
-        #try:
-        if self.dataframe.is_empty() == True:
+        if self.dataframe.empty() == True:
             print("No Missing Value Found")
         else:
-            missing_value = self.dataframe.null_count()
+            missing_value = self.dataframe.isnull().sum()
             return missing_value
-        # except:
-        #     print("Something went wrong....\nChecking Dataset: Recommended.\nPlease try again")
     
     def shape_data(self):
         """
@@ -95,10 +90,7 @@ class Prepup:
         :return: The shape of the dataframe
         :author: Neokai
         """
-        #try:
         return self.dataframe.shape
-        # except:
-        #     print("Something went wrong....\nChecking Dataset: Recommended.\nPlease try again")
     
     def missing_plot(self):
         """
@@ -109,7 +101,6 @@ class Prepup:
         :return: The number of missing values for each column in the dataframe
         :author: Neokai
         """
-        #try:
         empty_count = 0
         non_empty_count = 0
 
@@ -136,8 +127,6 @@ class Prepup:
             tpl.theme('matrix')
             tpl.show()
             tpl.clear_data()
-        # except:
-        #     print("Something went wrong....\nFailed to fetch missing value count.\nPlease try again...")
             
     def plot_histogram(self):
         """
@@ -148,25 +137,17 @@ class Prepup:
         :return: A histogram for each of the columns in the dataframe
         :author: Neokai
         """
-        #try:
         dataframe = self.dataframe.fillna(0)
         numerical_columns = dataframe.select_dtypes(include=['number'], exclude=['datetime', 'object'])
         for column in numerical_columns:
-            #if dataframe[column].dtype != pl.Categorical and dataframe[column].dtype != pl.Datetime and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Datetime and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Unknown:
             tpl.clear_data()
             tpl.theme('dark')
             tpl.plotsize(80,20)
             print("\n")
             tpl.hist(dataframe[column], bins=20,color='light-blue', marker='dot') #color=46)
             tpl.title(column)
-            #tpl.grid(horizontal=50, vertical=50)
             tpl.show()
             tpl.clear_data()
-        # except:
-        #     print("Something went wrong....\nFailed to fetch feature distribution...\nPlease try again...")
-
-    
-
     
     def correlation_n(self):
         """
@@ -179,11 +160,7 @@ class Prepup:
         :return: A bar graph of the correlation between all numerical features in the dataset
         :author: Neokai
         """
-        #try:
         numerical_columns = self.dataframe.select_dtypes(include=['number'], exclude=['datetime', 'object'])
-        #dtype_select_df = self.dataframe.select([pl.col(pl.Decimal),pl.col(pl.Float32),pl.col(pl.Float64),pl.col(pl.Int16),pl.col(pl.Int32),pl.col(pl.Int64),pl.col(pl.Int8),pl.col(pl.UInt16),pl.col(pl.UInt32),pl.col(pl.UInt64),pl.col(pl.UInt8),pl.col(pl.Date),pl.col(pl.Datetime),pl.col(pl.Duration),pl.col(pl.Time)])
-        #dtype_select_df = dtype_select_df.to_pandas()
-        #corr_d = pd.DataFrame()
         features = []
         correlation_val = []
         for i in numerical_columns:
@@ -194,8 +171,6 @@ class Prepup:
         tpl.simple_bar(features, correlation_val,width=100, title='Correlation Between these Features', color=92,marker='*')
         tpl.show()
         tpl.clear_data()
-        # except:
-        #     print("Something went wrong....\nFailed to fetch Correlation Matrix...\nPlease try again...")
 
     def scatter_plot(self):
         """
@@ -206,10 +181,7 @@ class Prepup:
         :return: A scatter plot for each column in the dataframe
         :author: Neokai
         """
-        #try:
         numerical_columns = self.dataframe.select_dtypes(include=['number'], exclude=['datetime', 'object'])
-        #dtype_select_df = self.dataframe.select([pl.col(pl.Decimal),pl.col(pl.Float32),pl.col(pl.Float64),pl.col(pl.Int16),pl.col(pl.Int32),pl.col(pl.Int64),pl.col(pl.Int8),pl.col(pl.UInt16),pl.col(pl.UInt32),pl.col(pl.UInt64),pl.col(pl.UInt8),pl.col(pl.Date),pl.col(pl.Datetime),pl.col(pl.Duration),pl.col(pl.Time)])
-        #dtype_select_df = dtype_select_df.to_pandas()
         for i in numerical_columns:
             for j in numerical_columns:
                 scatter_p = pd.DataFrame()
@@ -221,8 +193,6 @@ class Prepup:
                 tpl.scatter(scatter_p["value1"], scatter_p["value2"], color='white')
                 tpl.show()
                 tpl.clear_data()
-        # except:
-        #     print("Something went wrong....\nScatter Plot Build Failed...\nPlease try again...")
     
     def find_outliers(self, k=1.5):
         """
@@ -235,10 +205,7 @@ class Prepup:
         :return: A print statement of the outliers detected in each column
         :author: Neokai
         """
-        #try:
         numerical_columns = self.dataframe.select_dtypes(include=['number'], exclude=['datetime', 'object'])
-        #dtype_select_df = self.dataframe.select([pl.col(pl.Decimal),pl.col(pl.Float32),pl.col(pl.Float64),pl.col(pl.Int16),pl.col(pl.Int32),pl.col(pl.Int64),pl.col(pl.Int8),pl.col(pl.UInt16),pl.col(pl.UInt32),pl.col(pl.UInt64),pl.col(pl.UInt8),pl.col(pl.Date),pl.col(pl.Datetime),pl.col(pl.Duration),pl.col(pl.Time)])
-        #dtype_select_df = dtype_select_df.to_pandas()
 
         for i in numerical_columns:
             outliers = []
@@ -251,8 +218,6 @@ class Prepup:
                 if j < lower_bound or j > upper_bound:
                     outliers.append(j)
             print(f"\tOutliers detected in {i}\n")
-        # except:
-        #     print("Something went wrong....\nFailed to Find Outliers...\nPlease try again...")
     
     
     def feature_scaling(self):
@@ -266,7 +231,6 @@ class Prepup:
         :return: A dataframe with normalized values
         :author: Neokai
         """
-        #try:
         isExist = os.path.exists("missing_data.parquet")
         if isExist == True:
             dataframe = pd.read_parquet("missing_data.parquet")
@@ -275,7 +239,6 @@ class Prepup:
         target_col = input("\nEnter the Target variable to drop: (or 'None')")
         
         if target_col != "None":
-            #df = dataframe.to_pandas()
             df = dataframe
             df = df.drop(target_col, axis=1)
         else:
@@ -289,12 +252,10 @@ class Prepup:
         numerical_columns = df.select_dtypes(include=['number'], exclude=['datetime', 'object'])
         if choice==1:
             for column in numerical_columns:
-                #if dataframe[column].dtype != pl.Categorical and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Unknown:
                 robust = RobustScaler()
                 df[[column]] = robust.fit_transform(df[[column]])
         elif choice==2:    
             for column in numerical_columns:
-                #if dataframe[column].dtype != pl.Categorical and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Unknown:
                 scaler = StandardScaler()
                 df[[column]] = scaler.fit_transform(df[[column]])
         
@@ -309,9 +270,7 @@ class Prepup:
         else:
             path = path + "/NormalizedData.csv"
         df.to_csv(path)
-        print("\nFeature Normalized and saved succesfully")
-        # except:
-        #     print("Something went wrong....\nFailed to perform Feature Scaling...\nPlease try again...\nImputing missing values recommended.")
+        print("\nFeature Normalized and saved successfully")
     
     def check_nomral_distrubution(self):
         """
@@ -323,11 +282,9 @@ class Prepup:
         :return: The name of the column, whether it is normally distributed or not and its p-value
         :author: Neokai
         """
-        #try:
         dataframe = self.dataframe
         numerical_columns = dataframe.select_dtypes(include=['number'], exclude=['datetime', 'object'])
         for column in numerical_columns:
-            #if dataframe[column].dtype != pl.Categorical and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Datetime and dataframe[column].dtype != pl.Unknown:
             stats, p_value = shapiro(dataframe[column])
             if p_value > 0.05:
                 h_8 = Figlet(font='term') 
@@ -335,8 +292,6 @@ class Prepup:
             else:
                 h_8 = Figlet(font='term')
                 print(colored(h_8.renderText(f"* {column} doesn't have a Normal Distribution with a p-value of {p_value} \n"), 'red'))
-        # except:
-        #     print("Something went wrong....\nFailed to perform Feature Scaling...\nPlease try again...")
 
 
     def imbalanced_dataset(self):    
@@ -360,13 +315,11 @@ class Prepup:
     
     def skewness(self):
         dataframe = self.dataframe
-        #dataframe = dataframe.to_pandas()
         numeric_data = dataframe.select_dtypes(['number'])
         print("\t\nSkewness present in the data: ",skew(numeric_data, axis=0, bias=True))
     
     def kurtosis(self):
         dataframe = self.dataframe
-        #dataframe = dataframe.to_pandas()
         numeric_data = dataframe.select_dtypes(['number'])
         print("\t\nKurtosis present in the data: ",kurtosis(numeric_data, axis=0, bias=True))
 
@@ -381,7 +334,6 @@ class Prepup:
         :return: The dataframe with missing values imputed
         :author: Neokai
         """
-        #try:
         dataframe = self.dataframe
         print("Choice Available to Impute Missing Data: \n")
         print("\t1. [Press 1] Drop Missing Data.\n")
@@ -431,10 +383,8 @@ class Prepup:
             print("\nMissing Data Imputed and saved succesfully")
             print(colored(term_font.renderText("\nDone...")))
         elif choice == 3:
-            #dataframe = dataframe.to_pandas()
             numerical_columns = dataframe.select_dtypes(include='number', exclude=['datetime', 'object'])
             for column in numerical_columns:
-                #if dataframe[column].dtype!= pl.Categorical and dataframe[column].dtype != pl.Date and dataframe[column].dtype != pl.Datetime and dataframe[column].dtype != pl.Duration and dataframe[column].dtype != pl.Time and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Unknown:
                 dataframe[column] = dataframe[column].fillna(dataframe[column].mean())
             dataframe.to_parquet("missing_data.parquet")
             data_path = input("\nEnter path to save Imputed data : ")
@@ -452,10 +402,8 @@ class Prepup:
             print("\nMissing Data Imputed and saved succesfully")
             print(colored(term_font.renderText("\nDone...")))
         elif choice == 4:
-            #dataframe = dataframe.to_pandas()
             numerical_columns = dataframe.select_dtypes(include='number', exclude=['datetime', 'object'])
             for column in numerical_columns:
-                #if dataframe[column].dtype != pl.Categorical and dataframe[column].dtype != pl.Date and dataframe[column].dtype != pl.Datetime and dataframe[column].dtype != pl.Duration and dataframe[column].dtype != pl.Time and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Unknown:
                 dataframe[column] = dataframe[column].fillna(dataframe[column].median())
             dataframe.to_parquet("missing_data.parquet")
             data_path = input("\nEnter path to save Imputed data : ")
@@ -473,10 +421,8 @@ class Prepup:
             print("\nMissing Data Imputed and saved succesfully")
             print(colored(term_font.renderText("\nDone...")))
         elif choice == 5:
-            #dataframe = dataframe.to_pandas()
             numerical_columns = dataframe.select_dtypes(include='number', exclude=['datetime', 'object'])
             for column in numerical_columns:
-                #if dataframe[column].dtype != pl.Categorical and dataframe[column].dtype != pl.Date and dataframe[column].dtype != pl.Datetime and dataframe[column].dtype != pl.Duration and dataframe[column].dtype != pl.Time and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Unknown:
                 mean = dataframe[column].mean()
                 std = dataframe[column].std()
                 random_values = np.random.normal(loc=mean, scale=std, size=dataframe[column].isnull().sum())
@@ -531,10 +477,8 @@ class Prepup:
             print("\nMissing Data Imputed and saved succesfully")
             print(colored(term_font.renderText("\nDone...")))
         elif choice == 8: 
-            #dataframe = dataframe.to_pandas()
             numerical_columns = dataframe.select_dtypes(include='number', exclude=['datetime', 'object'])
             for column in numerical_columns:
-                #if dataframe[column].dtype != pl.Categorical and dataframe[column].dtype != pl.Date and dataframe[column].dtype != pl.Datetime and dataframe[column].dtype != pl.Duration and dataframe[column].dtype != pl.Time and dataframe[column].dtype != pl.Utf8 and dataframe[column].dtype != pl.Boolean and dataframe[column].dtype != pl.Null and dataframe[column].dtype != pl.Object and dataframe[column].dtype != pl.Unknown:
                 missing_inds = dataframe[column].isnull()
                 non_missing_inds = ~missing_inds
                 non_missing_vals = dataframe[column][non_missing_inds]
