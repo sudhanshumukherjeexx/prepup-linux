@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from main.common import Prepup
+from main import common
 import plotext as tpl  
 
 @pytest.fixture
@@ -15,7 +15,7 @@ def sample_dataframe():
 
 def test_correlation_n(sample_dataframe, capsys):
     # Class instance with the sample DataFrame
-    df = Prepup(dataframe=sample_dataframe)
+    df = common.Prepup(dataframe=sample_dataframe)
 
     # Call the function
     df.correlation_n()
