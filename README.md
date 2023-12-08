@@ -1,6 +1,6 @@
 # 💻 Prepup
 
-![Static Badge](https://img.shields.io/badge/Built_with_%E2%99%A5%EF%B8%8F-Sudhanshu_Mukherjee-yellow?link=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fsudhanshumukherjeexx%2F)
+![Static Badge](https://img.shields.io/badge/Built_with_%E2%99%A5%EF%B8%8F-Sudhanshu_Mukherjee-black?link=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fsudhanshumukherjeexx%2F)
 
 [![image](https://img.shields.io/pypi/v/prepup-linux.svg)](https://pypi.python.org/pypi/prepup-linux)
 ![Static Badge](https://img.shields.io/badge/Linux-Supported-green)
