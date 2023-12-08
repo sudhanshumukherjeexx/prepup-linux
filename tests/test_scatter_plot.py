@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from main.common import Prepup
+from common import Prepup
 import plotext as tpl
 
 

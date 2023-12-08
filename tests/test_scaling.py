@@ -2,7 +2,7 @@ import pytest
 import main.common  
 import pandas as pd
 import os
-from main.common import Prepup
+from common import Prepup
 
 
 

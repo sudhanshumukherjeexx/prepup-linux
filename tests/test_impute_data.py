@@ -1,5 +1,5 @@
 import pytest
-from main.common import Prepup  
+from common import Prepup  
 import pandas as pd
 import os
 

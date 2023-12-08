@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from main.common import Prepup
+from common import Prepup
 
 @pytest.fixture
 def sample_dataframe():
