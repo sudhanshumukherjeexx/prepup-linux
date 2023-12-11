@@ -12,7 +12,7 @@
   
   
 
-### Prepup is a free open-source package that lets you inspect, explore, visualize, and perform pre-processing tasks on datasets in your windows/macOS terminal.
+### Prepup is a free open-source package that lets you inspect, explore, visualize, and perform pre-processing tasks on datasets in your linux/ubuntu/macOS terminal or any command line interface.
 
   
 
@@ -20,7 +20,7 @@
 
 - Prepup can be installed using the Pip package manager.
 
--  ### !pip install Prepup
+-  ** !pip install `prepup-linux` **
 
   
 
@@ -76,9 +76,7 @@
 
 # Command Line Arguments available in PREPUP
 
-  
-
-## 🕵️ Prepup "File name or File path" -inspect
+## 🕵️ Prepup "File name or File path" `-inspect`
 
 https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/93da36fc-1c7e-449c-9732-bfce81f3a915
 
@@ -88,7 +86,7 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/93da36fc-1c7e-449
 
   
 
-## 🧭 Prepup "File name or File path" -explore
+## 🧭 Prepup "File name or File path" `-explore`
 
 https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/eeccaf19-6c2a-4e8c-ab4a-8c3afb59f8c5
 
@@ -98,7 +96,7 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/eeccaf19-6c2a-4e8
 
   
 
-## 📊 Prepup "File name or File path" -visualize
+## 📊 Prepup "File name or File path" `-visualize`
 
 #https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/61fffd53-0b26-4537-ac1d-5296a2f8b52e
 
@@ -108,7 +106,7 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/eeccaf19-6c2a-4e8
 
   
 
-## 🔥 Prepup "File name or File path" -impute
+## 🔥 Prepup "File name or File path" `-impute`
 
 https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/3d0160af-0059-4b4e-b278-abe8a587c5b5
 
@@ -136,7 +134,7 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/3d0160af-0059-4b4
 
   
 
-## 🌐 Prepup "File name or File path" -standardize
+## 🌐 Prepup "File name or File path" `-standardize`
 
 https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/c098a7aa-1cb9-464b-bd89-1ea3c38b842e
 
@@ -144,32 +142,20 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/c098a7aa-1cb9-464
 
 1. Robust Scaler
 
-  
-
 2. Standard Scaler
 
-  
-
 - Robust Scaler is recommended if there are outliers present and you feel they can have an influence on the Machine Learning model.
-
   
-
 - Standard Scaler is the go-to function if you want to standardize the dataset before training the model on it.
 
 - File Name: If the current working directory is same as the file location or FILE PATH
-
-  
 
 # License
 
 - Free software: MIT license
 
-  
-
 # Package Link
 
 - Github: https://github.com/sudhanshumukherjeexx/prepup-linux
-
-  
 
 - Documentation: https://sudhanshumukherjeexx.github.io/prepup-linux

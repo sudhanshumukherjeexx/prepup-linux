@@ -6,10 +6,8 @@
    author : "Neokai"
 """
 import argparse
-#import polars as pl
 import pandas as pd
 from main.common import Prepup
-#from common import Prepup
 from termcolor import colored
 from pyfiglet import Figlet
 import time
