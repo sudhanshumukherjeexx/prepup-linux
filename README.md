@@ -88,8 +88,8 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/93da36fc-1c7e-449
 
 ## 🧭 Prepup "File name or File path" `-explore`
 
-https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/eeccaf19-6c2a-4e8c-ab4a-8c3afb59f8c5
-
+#https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/eeccaf19-6c2a-4e8c-ab4a-8c3afb59f8c5
+https://github.com/sudhanshumukherjeexx/prepup-linux/blob/main/tutorials/explore.mkv
 - explore flag takes the dataframe and returns the Features available, Features datatype, Correlation between features, Detects Outliers, Checks Normal Distribution, Checks Skewness, Checks Kurtosis, and also allows the option to check if the dataset is Imbalanced.
 
 - File Name: If the current working directory is same as the file location or FILE PATH
