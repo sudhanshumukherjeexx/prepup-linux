@@ -96,6 +96,10 @@ https://github.com/sudhanshumukherjeexx/prepup-linux/blob/main/tutorials/explore
 
   
 
+https://github.com/sudhanshumukherjeexx/prepup-linux/assets/64360018/532c3d2e-28ce-4ac6-9c9e-94153f66e388
+
+
+
 ## 📊 Prepup "File name or File path" `-visualize`
 
 https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/61fffd53-0b26-4537-ac1d-5296a2f8b52e
