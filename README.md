@@ -78,7 +78,10 @@
 
 ## 🕵️ Prepup "File name or File path" `-inspect`
 
-https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/93da36fc-1c7e-449c-9732-bfce81f3a915
+
+https://github.com/sudhanshumukherjeexx/prepup-linux/assets/64360018/a15889a6-13a0-447b-885b-f112d87ef846
+
+
 
 - inspect flag takes the dataframe and returns the Features available, Features datatype, and missing values present in the Dataset.
 
@@ -88,21 +91,22 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/93da36fc-1c7e-449
 
 ## 🧭 Prepup "File name or File path" `-explore`
 
-#https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/eeccaf19-6c2a-4e8c-ab4a-8c3afb59f8c5
-https://github.com/sudhanshumukherjeexx/prepup-linux/blob/main/tutorials/explore.mkv
+
+https://github.com/sudhanshumukherjeexx/prepup-linux/assets/64360018/5753c054-fe5c-46fd-90c2-bfc2cf831c3e
+
 - explore flag takes the dataframe and returns the Features available, Features datatype, Correlation between features, Detects Outliers, Checks Normal Distribution, Checks Skewness, Checks Kurtosis, and also allows the option to check if the dataset is Imbalanced.
 
 - File Name: If the current working directory is same as the file location or FILE PATH
 
   
 
-https://github.com/sudhanshumukherjeexx/prepup-linux/assets/64360018/532c3d2e-28ce-4ac6-9c9e-94153f66e388
 
 
 
 ## 📊 Prepup "File name or File path" `-visualize`
 
-https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/61fffd53-0b26-4537-ac1d-5296a2f8b52e
+
+https://github.com/sudhanshumukherjeexx/prepup-linux/assets/64360018/81bdbf0f-0e63-4360-954d-4d2854eec751
 
 - visualize flag plots of the feature distribution directly on the terminal.
 
@@ -112,7 +116,12 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/61fffd53-0b26-453
 
 ## 🔥 Prepup "File name or File path" `-impute`
 
-https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/3d0160af-0059-4b4e-b278-abe8a587c5b5
+
+
+https://github.com/sudhanshumukherjeexx/prepup-linux/assets/64360018/7f70f26a-063a-4af8-8f5e-47c7192fd898
+
+
+
 
 - There are 8 different strategies available to impute missing data using Prepup
 
@@ -140,7 +149,13 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/3d0160af-0059-4b4
 
 ## 🌐 Prepup "File name or File path" `-standardize`
 
-https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/c098a7aa-1cb9-464b-bd89-1ea3c38b842e
+
+
+https://github.com/sudhanshumukherjeexx/prepup-linux/assets/64360018/984b7179-a3f5-4c3d-ab22-c3454593435e
+
+
+
+
 
 - Standardize allows you to standardize the dataset using two different methods:
 
