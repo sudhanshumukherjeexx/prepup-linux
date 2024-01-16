@@ -20,7 +20,7 @@
 
 - Prepup can be installed using the Pip package manager.
 
--  ** !pip install `prepup-linux` **
+-  **!pip install `prepup-linux`**
 
   
 
@@ -98,7 +98,7 @@ https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/eeccaf19-6c2a-4e8
 
 ## 📊 Prepup "File name or File path" `-visualize`
 
-#https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/61fffd53-0b26-4537-ac1d-5296a2f8b52e
+https://github.com/sudhanshumukherjeexx/prepup/assets/64360018/61fffd53-0b26-4537-ac1d-5296a2f8b52e
 
 - visualize flag plots of the feature distribution directly on the terminal.
 
