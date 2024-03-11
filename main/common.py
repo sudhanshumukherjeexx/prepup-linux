@@ -144,7 +144,7 @@ class Prepup:
             tpl.theme('dark')
             tpl.plotsize(80,20)
             print("\n")
-            tpl.hist(dataframe[column], bins=20,color='light-blue', marker='dot') #color=46)
+            tpl.hist(dataframe[column], bins=20,color='light-blue', marker='sd') #color=46)
             tpl.title(column)
             tpl.show()
             tpl.clear_data()
@@ -236,7 +236,7 @@ class Prepup:
             dataframe = pd.read_parquet("missing_data.parquet")
         else:
             dataframe = self.dataframe
-        target_col = input("\nEnter the Target variable to drop: (or 'None')")
+        target_col = input("\nEnter the Target variable to drop (or 'None'): ")
         
         if target_col != "None":
             df = dataframe

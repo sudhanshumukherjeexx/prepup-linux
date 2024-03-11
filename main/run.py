@@ -89,7 +89,7 @@ def main():
         crafter.skewness()
 
         h_4 = Figlet(font='term')
-        print(colored(h_4.renderText("\nFeatures: Skewness Present in the Dataset..."),'light_blue'))
+        print(colored(h_4.renderText("\nFeatures: Kurtosis Present in the Dataset..."),'light_blue'))
         time.sleep(0.5)
         crafter.kurtosis()
 
