@@ -37,13 +37,43 @@ Prepup is a powerful, user-friendly data preprocessing tool designed to simplify
 
 ## 🛠 Installation
 
+> **⚠️ Important:** Creating a virtual environment is highly recommended when installing prepup-linux. As a data processing library, it has various dependencies that may conflict with your existing packages.
+
+### Setting Up a Virtual Environment
+
+#### Windows
+```bash
+# Create virtual environment
+python -m venv prepup-env
+
+# Activate virtual environment
+prepup-env\Scripts\activate
+
+# Deactivate when done
+deactivate
+```
+
+#### Linux/macOS
+```bash
+# Create virtual environment
+python3 -m venv prepup-env
+
+# Activate virtual environment
+source prepup-env/bin/activate
+
+# Deactivate when done
+deactivate
+```
+
 ### Using pip
 ```bash
+# Inside your activated virtual environment
 pip install prepup-linux
 ```
 
 ### From Source
 ```bash
+# Inside your activated virtual environment
 git clone https://github.com/sudhanshumukherjeexx/prepup-linux.git
 cd prepup-linux
 pip install .
@@ -113,6 +143,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 - Github: https://github.com/sudhanshumukherjeexx/prepup-linux
 - Documentation: https://sudhanshumukherjeexx.github.io/prepup-linux
-
-
-
