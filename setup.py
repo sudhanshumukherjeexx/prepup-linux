@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="prepup_linux",
-    version="0.2.1",
+    version="0.2.2",
     author="Sudhanshu Mukherjee",
     author_email="sudhanshumukherjeexx@gmail.com",
     description="Prepup is a free, open-source package for data preprocessing in terminal",
@@ -44,7 +44,7 @@ setuptools.setup(
         "numpy==2.2.3",
         "pandas==2.2.3",
         "plotext==5.2.8",
-        "pydantic==1.10.4",
+        "pydantic==2.10.6",
         "pyfiglet==0.8.post1",
         "pytest==7.3.1",
         "scikit_learn==1.6.1",
@@ -55,6 +55,8 @@ setuptools.setup(
         "tqdm==4.66.1",
         "lightgbm==4.6.0",
         "xgboost==2.1.4",
+        "nbformat==5.10.0",
+        "setuptools==76.1.0"
     ],
     extras_require={
         'dev': [

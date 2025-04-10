@@ -14,6 +14,10 @@ from termcolor import colored
 from pyfiglet import Figlet
 import time
 from sklearn.model_selection import train_test_split
+import io
+import sys
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
 
 term_font = Figlet(font="term")
 
@@ -44,14 +48,15 @@ class PrepupInteractive:
         os.system('cls' if os.name == 'nt' else 'clear')
         print(colored(self.big_font.renderText("PREPUP !"), 'green'))
         print(colored("Interactive Data Preprocessing & Analysis Tool", 'light_blue'))
-        print(colored("Prepup is a free open-source package that lets you perform data pre-processing tasks on datasets without writing a single line of code and minimal intervention.", 'light_blue'))
-        print("-" * 80)
+        print(colored("""Prepup is a free open-source package that lets you perform data pre-processing tasks on datasets 
+        without writing a single line of code and minimal intervention.""", 'light_blue'))
+        print("-" * 100)
         
         if self.file_path:
             print(f"Current dataset: {os.path.basename(self.file_path)}")
             if self.dataframe is not None:
                 print(f"Shape: {self.dataframe.shape[0]} rows × {self.dataframe.shape[1]} columns")
-        print("-" * 80)
+        print("-" * 100)
         
     def load_data(self):
         """Load data from a file"""
@@ -77,7 +82,6 @@ class PrepupInteractive:
             
             print(colored(f"\nSuccess! Dataset loaded with {self.dataframe.shape[0]} rows and {self.dataframe.shape[1]} columns.", 'green'))
             
-            # Preview data
             print("\nPreview of the first 5 rows:")
             print(self.dataframe.head())
             
@@ -96,7 +100,6 @@ class PrepupInteractive:
         self.display_header()
         print(colored(self.term_font.renderText("Data Inspection"), 'light_blue'))
         
-        # submenu for inspection options
         while True:
             print("\nInspection Options:")
             print("1. View features and data types")
@@ -504,6 +507,9 @@ class PrepupInteractive:
                 retry = input("Do you want to try saving again? (y/n): ")
                 if retry.lower() != 'y':
                     break
+    
+    
+
 
 
     def run(self):
@@ -542,45 +548,17 @@ class PrepupInteractive:
                 self.export_data()
             elif choice == '8':
                 self.automl()
-            else: 
+            elif choice == '9':
                 print(colored("\nThank you for using Prepup!", 'green'))
+                print(colored("Exiting...", 'light_blue'))
+                sys.exit(0)
+            else: 
+                print(colored("\nInvalid Choice. Thank you for using Prepup!", 'green'))
                 print(colored("Exiting...", 'light_blue'))
                 sys.exit(0)
             
 
 
-def main():
-    args = parse_args()
-    
-    # Check if running in interactive mode
-    if args.interactive:
-        app = PrepupInteractive()
-        
-        # If a file was provided, load it
-        if args.file:
-            try:
-                app.file_path = args.file
-                app.dataframe = load_file(args.file)
-                app.data_processor = Prepup(app.dataframe)
-                print(colored(f"Dataset {os.path.basename(args.file)} loaded successfully.", 'green'))
-            except Exception as e:
-                print(colored(f"Error loading file: {str(e)}", 'red'))
-        
-        # Run the interactive application
-        app.run()
-    else:
-        # Traditional CLI mode with flags
-        if args.file:
-            try:
-                df = load_file(args.file)
-                run_cli_mode(args, df)
-            except Exception as e:
-                print(colored(f"Error: {str(e)}", 'red'))
-                sys.exit(1)
-        else:
-            # No file provided for CLI mode
-            print(colored("Error: No dataset file provided. Please specify a file path or use -interactive mode.", 'red'))
-            sys.exit(1)
                    
 
 def main():
