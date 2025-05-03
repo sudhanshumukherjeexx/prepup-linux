@@ -10,6 +10,32 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 
+# ⚠️ PACKAGE RENAMED: prepup-linux → ride-cli
+
+> **IMPORTANT**: This package has been renamed to `ride-cli`. Please use the new package for all future installations and updates.
+
+## Migration Instructions
+
+To migrate to the new package:
+
+```bash
+# Uninstall the old package
+pip uninstall prepup-linux
+
+# Install the new package
+pip install ride-cli
+```
+
+All functionality remains the same. The only change is the package name and command:
+- Old command: `prepup`
+- New command: `ride` or `ride-cli`
+
+## Why the Change?
+
+Prepup began in summer 2023 as the Preprocessing Utility Package (PrePUP) with just 5 terminal flags—a learning project that evolved into a comprehensive data tool. After creating prepup-linux to address cross-platform compatibility issues, we realized the name incorrectly suggested Linux exclusivity, when our vision has always been platform independence. We also tested our first menu-driven approach in prepup-linux. We're now transitioning to RIDE-CLI (Rapid Insights Data Engine), a name that better reflects our tool's capabilities: rapid data preprocessing, meaningful insights generation, and cross-platform functionality. This rebranding represents our growth from a simple utility to a robust data engine, while maintaining our commitment to continuous improvements and expanded features across all platforms.
+
+---
+
 
 ## 🚀 Quick Overview
 
@@ -138,8 +164,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📋 License
 Distributed under the MIT License. See `LICENSE` for more information.
 
+## 🔄 Migration Notice
 
-# Package Link
+This package is deprecated and will no longer receive updates. Please migrate to [ride-cli](https://github.com/sudhanshumukherjeexx/ride-cli) for the latest features and support.
 
-- Github: https://github.com/sudhanshumukherjeexx/prepup-linux
-- Documentation: https://sudhanshumukherjeexx.github.io/prepup-linux
+### New Package Links
+- GitHub: https://github.com/sudhanshumukherjeexx/ride-cli
+- PyPI: https://pypi.org/project/ride-cli/

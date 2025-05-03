@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 
-"""Main module.
-
-   author : "Neokai"
-"""
 import argparse
 import pandas as pd
 import numpy as np
@@ -17,6 +13,9 @@ from sklearn.model_selection import train_test_split
 import io
 import sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+import shutil
+import textwrap
+import warnings
 
 
 term_font = Figlet(font="term")
@@ -43,25 +42,188 @@ class PrepupInteractive:
         self.term_font = Figlet(font="term")
         self.big_font = Figlet(font="big")
         
+    def display_section_header(self, title, subtitle=None):
+        """Display a formatted section header that adjusts to screen size"""
+        os.system('cls' if os.name == 'nt' else 'clear')
+        
+        # get terminal size
+        terminal_width = shutil.get_terminal_size().columns
+        
+        # create decorative border for section
+        border_char = "═"
+        top_border = "╔" + border_char * (terminal_width - 2) + "╗"
+        bottom_border = "╚" + border_char * (terminal_width - 2) + "╝"
+        
+        print(colored(top_border, 'cyan'))
+        
+        # display section title with ASCII art
+        section_font = Figlet(font='digital')  # You can change the font
+        title_ascii = section_font.renderText(title)
+        
+        # center and display the ASCII title
+        for line in title_ascii.split('\n'):
+            if line.strip():
+                # ensure the line fits within terminal width
+                if len(line) > terminal_width - 4:
+                    line = line[:terminal_width - 7] + "..."
+                centered_line = line.center(terminal_width - 4)
+                print(colored("║ " + centered_line + " ║", 'yellow'))
+        
+        # add subtitle if provided
+        if subtitle:
+            separator = "─" * (terminal_width - 4)
+            print(colored("║ " + separator + " ║", 'cyan'))
+            
+            # wrap and center subtitle
+            wrapped_lines = textwrap.wrap(subtitle, width=terminal_width - 8)
+            for line in wrapped_lines:
+                centered_line = line.center(terminal_width - 4)
+                print(colored("║ " + centered_line + " ║", 'light_blue'))
+        
+        print(colored(bottom_border, 'cyan'))
+        
+        # current dataset info if available
+        if self.file_path:
+            print(f"\nCurrent dataset: {os.path.basename(self.file_path)}")
+            if self.dataframe is not None:
+                print(f"Shape: {self.dataframe.shape[0]} rows × {self.dataframe.shape[1]} columns")
+        
+        print("-" * terminal_width)
+        print()
+
+
+    def _display_minimalist_header(self):
+        """Display a clean, minimalist header using figlet"""
+        terminal_width = shutil.get_terminal_size().columns
+        
+        # Top border
+        print()
+        print(colored("═" * terminal_width, 'green'))
+        print()
+        
+        # Use figlet for the logo
+        if terminal_width >= 80:
+            # Use a font that renders well
+            f = Figlet(font='doh', width=terminal_width)
+            logo_text = f.renderText('PREPUP!')
+            
+            # Print each line centered
+            for line in logo_text.rstrip().split('\n'):
+                print(colored(line.center(terminal_width), 'green'))
+        else:
+            # Fallback to simple text for narrow terminals
+            f = Figlet(font='small', width=terminal_width)
+            logo_text = f.renderText('PREPUP!')
+            
+            for line in logo_text.rstrip().split('\n'):
+                print(colored(line.center(terminal_width), 'green'))
+        
+    
+        print()
+        
+        # Bottom border
+        print(colored("═" * terminal_width, 'green'))
+        print()
+
+    
     def display_header(self):
         """Display the application header"""
         os.system('cls' if os.name == 'nt' else 'clear')
-        print(colored(self.big_font.renderText("PREPUP !"), 'green'))
-        print(colored("Interactive Data Preprocessing & Analysis Tool", 'light_blue'))
-        print(colored("""Prepup is a free open-source package that lets you perform data pre-processing tasks on datasets 
-        without writing a single line of code and minimal intervention.""", 'light_blue'))
-        print("-" * 100)
         
+        # Display deprecation warning
+        print(colored("\n⚠️ DEPRECATION NOTICE: prepup-linux has been renamed to ride-cli.", 'yellow'))
+        print(colored("Please uninstall prepup-linux and install ride-cli instead:", 'yellow'))
+        print(colored("  pip uninstall prepup-linux", 'red'))
+        print(colored("  pip install ride-cli", 'green'))
+        print(colored("This package will be deprecated soon.\n", 'yellow'))
+        
+        # Display the minimalist header
+        self._display_minimalist_header()
+        
+        # Display the formatted description
+        self.display_formatted_description()
+        
+        # Display current dataset info if available
         if self.file_path:
-            print(f"Current dataset: {os.path.basename(self.file_path)}")
+            print(f"\nCurrent dataset: {os.path.basename(self.file_path)}")
             if self.dataframe is not None:
                 print(f"Shape: {self.dataframe.shape[0]} rows × {self.dataframe.shape[1]} columns")
-        print("-" * 100)
+        
+        # Dynamic separator based on terminal width
+        terminal_width = shutil.get_terminal_size().columns
+        print("-" * terminal_width)
+
+
+    # def display_header(self):
+    #     """Display the application header"""
+    #     os.system('cls' if os.name == 'nt' else 'clear')
+        
+    #     # Display the main title
+    #     print(colored(self.big_font.renderText("PREPUP !"), 'green'))
+        
+    #     # Display the formatted description
+    #     self.display_formatted_description()
+        
+    #     # Display current dataset info if available
+    #     if self.file_path:
+    #         print(f"\nCurrent dataset: {os.path.basename(self.file_path)}")
+    #         if self.dataframe is not None:
+    #             print(f"Shape: {self.dataframe.shape[0]} rows × {self.dataframe.shape[1]} columns")
+        
+    #     # Dynamic separator based on terminal width
+    #     terminal_width = shutil.get_terminal_size().columns
+    #     print("-" * terminal_width)
+    
+    
+    def display_formatted_description(self):
+        """Display a properly formatted description that adjusts to screen size"""
+        # Get terminal size
+        terminal_width = shutil.get_terminal_size().columns
+        
+        # Create a decorative border
+        border_char = "═"
+        top_border = "╔" + border_char * (terminal_width - 2) + "╗"
+        bottom_border = "╚" + border_char * (terminal_width - 2) + "╝"
+        
+        # Description text
+        description = """Prepup: Interactive Data Analysis Tool
+
+            Prepup is a free open-source package that lets you perform data pre-processing tasks on datasets without writing a single line of code and minimal intervention."""
+        
+        # Calculate padding for centering
+        padding_width = terminal_width - 4  # Account for borders
+        
+        print(colored(top_border, 'cyan'))
+        
+        # Split the description into title and body
+        lines = description.strip().split('\n')
+        title = lines[0]
+        body = '\n'.join(lines[1:]).strip()
+        
+        # Display the title centered (without ASCII art for cleaner look)
+        title_padding = " " * ((padding_width - len(title)) // 2)
+        print(colored("║ " + title_padding + title + title_padding + " " * (padding_width - len(title_padding) * 2 - len(title)) + " ║", 'yellow', attrs=['bold']))
+        
+        # Add a separator
+        separator = "─" * (terminal_width - 4)
+        print(colored("║ " + separator + " ║", 'cyan'))
+        
+        # Wrap and display the body text
+        wrapped_lines = textwrap.wrap(body, width=padding_width-2)
+        for line in wrapped_lines:
+            line_padding = " " * ((padding_width - len(line)) // 2)
+            padded_line = line_padding + line + line_padding + " " * (padding_width - len(line_padding) * 2 - len(line))
+            print(colored("║ " + padded_line + " ║", 'light_blue'))
+        
+        print(colored(bottom_border, 'cyan'))  
         
     def load_data(self):
         """Load data from a file"""
-        self.display_header()
-        print(colored(self.term_font.renderText("Load Dataset"), 'light_blue'))
+
+        self.display_section_header(
+        "Load Dataset", 
+        "Import your data from CSV, Excel, or Parquet files"
+    )
         
         file_path = input("Enter the path to your dataset file (CSV, Excel, Parquet): ")
         
@@ -97,8 +259,10 @@ class PrepupInteractive:
             self.display_no_data_message()
             return
             
-        self.display_header()
-        print(colored(self.term_font.renderText("Data Inspection"), 'light_blue'))
+        self.display_section_header(
+        "Data Inspection",
+        "Explore your dataset structure, types, and basic information"
+    )
         
         while True:
             print("\nInspection Options:")
@@ -130,7 +294,24 @@ class PrepupInteractive:
                 try:
                     n = int(n_rows)
                     print(f"\nFirst {n} rows of the dataset:")
-                    print(self.dataframe.head(n))
+                    
+                    column_map = {}
+            
+                    for i, col in enumerate(self.dataframe.columns):
+                        # get current data type
+                        col_type = str(self.dataframe[col].dtype)
+                        
+                        # sample values (up to 5)
+                        samples = self.dataframe[col].dropna().head(n).values
+                        sample_str = ', '.join([str(x) for x in samples])
+                        if len(sample_str) > 40:
+                            sample_str = sample_str[:37] + "..."
+                        
+                        # print row
+                        print(f"{i+1:<3} {col[:30]:<30} {col_type:<15} {sample_str:<40}")
+                        
+                        # store mapping
+                        column_map[i+1] = col
                 except ValueError:
                     print(colored("Invalid input. Please enter a number.", 'red'))
                     
@@ -145,8 +326,10 @@ class PrepupInteractive:
                 print(colored("Invalid choice. Please try again.", 'red'))
                 
             input("\nPress Enter to continue...")
-            self.display_header()
-            print(colored(self.term_font.renderText("Data Inspection"), 'light_blue'))
+            self.display_section_header(
+        "Data Inspection",
+        "Explore your dataset structure, types, and basic information"
+    )
             
     def explore_data(self):
         """Explore the dataset with statistical analysis"""
@@ -154,8 +337,10 @@ class PrepupInteractive:
             self.display_no_data_message()
             return
             
-        self.display_header()
-        print(colored(self.term_font.renderText("Data Exploration"), 'light_blue'))
+        self.display_section_header(
+        "Data Exploration",
+        "Perform statistical analysis and discover patterns in your data"
+    )
         
         # exploration options
         while True:
@@ -195,8 +380,10 @@ class PrepupInteractive:
                 print(colored("Invalid choice. Please try again.", 'red'))
                 
             input("\nPress Enter to continue...")
-            self.display_header()
-            print(colored(self.term_font.renderText("Data Exploration"), 'light_blue'))
+            self.display_section_header(
+        "Data Exploration",
+        "Perform statistical analysis and discover patterns in your data"
+    )
             
     def visualize_data(self):
         """Visualize the dataset"""
@@ -204,14 +391,15 @@ class PrepupInteractive:
             self.display_no_data_message()
             return
             
-        self.display_header()
-        print(colored(self.term_font.renderText("Data Visualization"), 'light_blue'))
+        self.display_section_header(
+            "Data Visualization",
+            "Create visual representations of your data"
+        )
         
-        # visualization options
         while True:
             print("\nVisualization Options:")
-            print("1. Plot histograms for numerical features")
-            print("2. Plot scatter plots")
+            print("1. Plot histogram")
+            print("2. Plot scatter plot")
             print("3. Back to main menu")
             
             choice = input("\nEnter your choice (1-3): ")
@@ -220,10 +408,7 @@ class PrepupInteractive:
                 self.data_processor.plot_histogram()
                 
             elif choice == '2':
-                print("\nNote: Scatter plots may generate many plots for datasets with many numerical features.")
-                confirm = input("Do you want to continue? (y/n): ")
-                if confirm.lower() == 'y':
-                    self.data_processor.scatter_plot()
+                self.data_processor.plot_scatter()
                 
             elif choice == '3':
                 break
@@ -232,8 +417,12 @@ class PrepupInteractive:
                 print(colored("Invalid choice. Please try again.", 'red'))
                 
             input("\nPress Enter to continue...")
-            self.display_header()
-            print(colored(self.term_font.renderText("Data Visualization"), 'light_blue'))
+            self.display_section_header(
+                "Data Visualization",
+                "Create visual representations of your data"
+            )
+
+    
             
     def impute_missing_values(self):
         """Handle missing values in the dataset"""
@@ -241,8 +430,10 @@ class PrepupInteractive:
             self.display_no_data_message()
             return
             
-        self.display_header()
-        print(colored(self.term_font.renderText("Missing Value Imputation"), 'light_blue'))
+        self.display_section_header(
+        "Missing Value Imputation",
+        "Handle missing data using various imputation strategies"
+    )
         
         # Check if there are any missing values
         if self.dataframe.isnull().sum().sum() == 0:
@@ -344,11 +535,46 @@ class PrepupInteractive:
             self.display_no_data_message()
             return
             
-        self.display_header()
-        print(colored(self.term_font.renderText("Feature Standardization"), 'light_blue'))
+        self.display_section_header(
+        "Feature Scaling",
+        "Scale and transform your features for better model performance"
+    )
+
         
         # Call feature_scaling method
         self.data_processor.feature_scaling()
+        
+        input("\nPress Enter to continue...")
+
+    def encode_features(self):
+        """Standardize feature columns"""
+        if self.dataframe is None:
+            self.display_no_data_message()
+            return
+            
+        self.display_section_header(
+        "Feature Encoding",
+        "Convert categorical variables into numerical format"
+    )
+        
+        # Call feature_scaling method
+        self.data_processor.feature_encoding()
+        
+        input("\nPress Enter to continue...")
+    
+    def change_datatype(self):
+        """Standardize feature columns"""
+        if self.dataframe is None:
+            self.display_no_data_message()
+            return
+            
+        self.display_section_header(
+        "Data Type Conversion",
+        "Convert columns to appropriate data types"
+    )
+        
+        # Call feature_scaling method
+        self.data_processor.data_type_conversion()
         
         input("\nPress Enter to continue...")
             
@@ -364,8 +590,10 @@ class PrepupInteractive:
             self.display_no_data_message()
             return
             
-        self.display_header()
-        print(colored(self.term_font.renderText("Export Data"), 'light_blue'))
+        self.display_section_header(
+        "Export Data",
+        "Save your processed data in various formats"
+    )
         
         # export path and format
         export_path = input("\nEnter the path to save the file: ")
@@ -426,8 +654,10 @@ class PrepupInteractive:
             self.display_no_data_message()
             return
         
-        self.display_header()
-        print(colored(self.term_font.renderText("AutoML Model Selection"), 'light_blue'))
+        self.display_section_header(
+        "AutoML",
+        "Automatically find the best machine learning model for your data"
+    )
         
         # Get the target variable
         print("\nAvailable columns:")
@@ -507,48 +737,56 @@ class PrepupInteractive:
                 retry = input("Do you want to try saving again? (y/n): ")
                 if retry.lower() != 'y':
                     break
-    
-    
-
 
 
     def run(self):
         """Run the interactive interface"""
         while True:
-            #self.capture_console_output(self)
             self.display_header()
             
-            # Main menu
+            # main menu
             print("\nMain Menu:")
+            print("\n")
             print("1. Load Dataset")
             print("2. Inspect Data")
-            print("3. Explore Data")
-            print("4. Visualize Data")
-            print("5. Impute Missing Values")
-            print("6. Standardize Features")
-            print("7. Export Data")
-            print("8. AutoML (Train & Evaluate Models)")
-            print("9. Exit Prepup")
+            print("3. Changing Data Type")
+            print("4. Explore Data")
+            print("5. Visualize Data")
+            print("6. Impute Missing Values")
+            print("7. Feature Encoding")
+            print("8. Feature Scaling and Tranformation")
+            print("9. Export Data")
+            print("10. AutoML (Train & Evaluate Models)")
+            print("\n'$' Export Data (saves current state)")
+            print("\n'exit': Exit Prepup")
             
-            choice = input("\nEnter your choice (1-9): ")
+            
+            choice = input("\nEnter your choice (1-10, $, exit): ")
             
             if choice == '1':
                 self.load_data()
             elif choice == '2':
                 self.inspect_data()
             elif choice == '3':
-                self.explore_data()
+                self.change_datatype()
             elif choice == '4':
-                self.visualize_data()
+                self.explore_data()
             elif choice == '5':
-                self.impute_missing_values()
+                self.visualize_data()
             elif choice == '6':
-                self.standardize_features()
+                self.impute_missing_values()
             elif choice == '7':
-                self.export_data()
+                self.encode_features()
             elif choice == '8':
-                self.automl()
+                self.standardize_features()
             elif choice == '9':
+                self.export_data()
+            elif choice == '10':
+                self.automl()
+            elif choice == '$':
+                self.export_data()
+            
+            elif choice == 'exit':
                 print(colored("\nThank you for using Prepup!", 'green'))
                 print(colored("Exiting...", 'light_blue'))
                 sys.exit(0)
@@ -561,8 +799,8 @@ class PrepupInteractive:
 
                    
 
-def main():
-    # Simplified argument parsing
+def main():    
+    # argument parsing
     parser = argparse.ArgumentParser(description="""
         Prepup: Interactive Data Preprocessing Tool
         Prepup is a free open-source package that lets you perform data pre-processing tasks on datasets without writing a single line of code and minimal intervention.
